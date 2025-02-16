@@ -8,4 +8,4 @@ protobuf==5.27.3
 numpy==1.26.0
 pillow==10.4.0
 peft==0.13.0
-pydantic==1.10.7
+pydantic==2.9.2
