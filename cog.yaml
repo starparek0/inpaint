@@ -14,7 +14,7 @@ build:
     - "git"
 
   # Python version in the form '3.10' or '3.10.14'
-  python_version: "3.11"
+  python_version: "3.12"
 
   # A list of packages in the format <package-name>==<version>
   python_packages:
