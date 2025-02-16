@@ -29,7 +29,7 @@ build:
     - "pillow==10.4.0"
     - "peft==0.13.0"
     - "git+https://github.com/Gothos/diffusers.git@flux-inpaint"
-    - "pydantic==1.10.7"
+    - "pydantic==2.9.2"
 
   # Commands run after the environment is setup
   run:
