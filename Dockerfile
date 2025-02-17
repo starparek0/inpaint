@@ -1,10 +1,14 @@
-FROM python:3.12
+# Używamy obrazu z Python 3.12, zgodnie z deklaracją w cog.yaml
+FROM python:3.12-slim
 
 WORKDIR /app
 
+# Kopiujemy plik z zależnościami
+COPY requirements.txt .
+
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+# Kopiujemy resztę plików projektu
 COPY . .
 
-RUN pip install --upgrade pip
-RUN pip install /tmp/cog-0.13.7-py3-none-any.whl 'pydantic<2'
-
-# Inne polecenia
+CMD ["python", "predict.py"]
