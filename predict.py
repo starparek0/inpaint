@@ -113,3 +113,28 @@ class Predictor(BasePredictor):
             raise
 
         print(f"✅ Setup completed in {time.time() - start:.2f} seconds.")
+
+    def predict(self, prompt: str, aspect_ratio: str = "1:1", image: Path = None, mask: Path = None) -> Path:
+        print(f"🚀 Running prediction with prompt: {prompt}")
+        width, height = ASPECT_RATIOS[aspect_ratio]
+        
+        if image and mask:
+            print("🔍 Running inpainting mode...")
+            pipe = self.inpaint_pipe
+            init_image = Image.open(image).convert("RGB")
+            mask_image = Image.open(mask).convert("RGB")
+            output = pipe(prompt=prompt, image=init_image, mask_image=mask_image).images[0]
+        elif image:
+            print("🔍 Running img2img mode...")
+            pipe = self.img2img_pipe
+            init_image = Image.open(image).convert("RGB")
+            output = pipe(prompt=prompt, image=init_image).images[0]
+        else:
+            print("🔍 Running txt2img mode...")
+            pipe = self.txt2img_pipe
+            output = pipe(prompt=prompt, width=width, height=height).images[0]
+        
+        output_path = Path("/tmp/output.png")
+        output.save(output_path)
+        print(f"✅ Image saved at {output_path}")
+        return output_path
