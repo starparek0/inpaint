@@ -77,7 +77,7 @@ class Predictor(BasePredictor):
             download_weights(MODEL_URL, '.')
         self.txt2img_pipe = FluxPipeline.from_pretrained(
             MODEL_CACHE,
-            torch_dtype=torch.bfloat16,
+            torch_dtype=torch.float16,
             cache_dir=MODEL_CACHE
         ).to("cuda")
         self.txt2img_pipe.__class__.load_lora_into_transformer = classmethod(
@@ -101,7 +101,7 @@ class Predictor(BasePredictor):
         print("Loading Flux inpainting pipeline")
         self.inpaint_pipe = FluxInpaintPipeline.from_pretrained(
             MODEL_CACHE,
-            torch_dtype=torch.bfloat16,
+            torch_dtype=torch.float16,
             cache_dir=MODEL_CACHE
         ).to("cuda")
 
