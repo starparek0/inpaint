@@ -1,5 +1,4 @@
-Dobrze, zintegruję te dwa pliki predict.py w jeden, aby można było używać zarówno funkcji LoRA, jak i inpainting w jednym modelu. Oto zintegrowana wersja:
-PythonCopy
+
 # Prediction interface for Cog ⚙️
 # https://github.com/replicate/cog/blob/main/docs/python.md
 # https://cog.run/python
