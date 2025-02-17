@@ -1,14 +1,16 @@
-# Używamy obrazu z Python 3.12, zgodnie z deklaracją w cog.yaml
+# Używamy obrazu bazowego z Pythonem 3.12 i obsługą CUDA
 FROM python:3.12-slim
 
 WORKDIR /app
 
-# Kopiujemy plik z zależnościami
-COPY requirements.txt .
+# Pobranie i instalacja pget
+RUN curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/download/v0.8.2/pget_linux_x86_64" && chmod +x /usr/local/bin/pget
 
-RUN pip install --upgrade pip && pip install -r requirements.txt
-
-# Kopiujemy resztę plików projektu
+# Kopiujemy pliki projektu
 COPY . .
+
+# Instalujemy pip i zależności
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
 
 CMD ["python", "predict.py"]
